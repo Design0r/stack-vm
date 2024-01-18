@@ -10,6 +10,8 @@ def main() -> int:
     parser = Parser(tokens)
     tree = parser.parse()
 
+    print(list(tree))
+
     return 0
 
 

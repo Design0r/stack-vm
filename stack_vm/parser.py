@@ -10,21 +10,21 @@ class VariableNode:
 
 
 @dataclass(frozen=True, slots=True)
-class NumberNode:
-    value: int | float
+class ValueNode:
+    value: int | float | str
 
 
 @dataclass(frozen=True, slots=True)
 class BinOpNode:
-    left: BinOpNode | NumberNode | VariableNode
+    left: BinOpNode | ValueNode | VariableNode
     operator: Token
-    right: BinOpNode | NumberNode | VariableNode
+    right: BinOpNode | ValueNode | VariableNode
 
 
 @dataclass(frozen=True, slots=True)
 class AssignmentNode:
     varibale_name: str
-    expression: BinOpNode
+    expression: BinOpNode | ValueNode | VariableNode
 
 
 class Parser:
@@ -82,11 +82,11 @@ class Parser:
 
     def parse_factor(self):
         if self.curr_token.type == Tokens.Integer:
-            node = NumberNode(self.curr_token.value)
+            node = ValueNode(self.curr_token.value)
             self.next_token()
             return node
         elif self.curr_token.type == Tokens.Float:
-            node = NumberNode(self.curr_token.value)
+            node = ValueNode(self.curr_token.value)
             self.next_token()
             return node
         elif self.curr_token.type == Tokens.Identifier:

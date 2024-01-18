@@ -1,0 +1,12 @@
+r = 10;
+pi = 3.141;
+
+
+circum = 2 * pi * r;
+area = pi * r * r;
+
+
+püppi = 24;
+boubi = 26;
+
+differenz = boubi - püppi;

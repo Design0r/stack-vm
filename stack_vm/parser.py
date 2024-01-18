@@ -4,26 +4,30 @@ from stack_vm.token import Tokens, Token
 from dataclasses import dataclass
 
 
+class ASTNode:
+    pass
+
+
 @dataclass(frozen=True, slots=True)
-class VariableNode:
+class VariableNode(ASTNode):
     name: str
 
 
 @dataclass(frozen=True, slots=True)
-class ValueNode:
+class ValueNode(ASTNode):
     value: int | float | str
 
 
 @dataclass(frozen=True, slots=True)
-class BinOpNode:
+class BinOpNode(ASTNode):
     left: BinOpNode | ValueNode | VariableNode
     operator: Token
     right: BinOpNode | ValueNode | VariableNode
 
 
 @dataclass(frozen=True, slots=True)
-class AssignmentNode:
-    varibale_name: str
+class AssignmentNode(ASTNode):
+    variable_name: str
     expression: BinOpNode | ValueNode | VariableNode
 
 
@@ -31,6 +35,7 @@ class Parser:
     def __init__(self, tokens: Generator[Token, None, None]):
         self.tokens = tokens
         self.curr_token = next(tokens)
+        print("Generating Abstact Syntax Tree...")
 
     def next_token(self):
         self.curr_token = next(self.tokens)

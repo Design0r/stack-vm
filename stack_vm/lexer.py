@@ -14,7 +14,10 @@ class Lexer:
             content = f.read()
         return content
 
-    def parse_tokens(self) -> Generator[Token, None, None]:
+    def parse_tokens(self, silent=False) -> Generator[Token, None, None]:
+        if not silent:
+            print("Starting Generating Tokens...")
+
         content = self._read_file()
         c_len = len(content)
 

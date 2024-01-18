@@ -1,4 +1,5 @@
 import time
+from typing import Iterable
 
 
 class StackMachine:
@@ -24,7 +25,10 @@ class StackMachine:
             return self._stack.pop()
         return [self._stack.pop() for _ in range(num)]
 
-    def exec(self) -> None:
+    def exec(self, silent=False) -> None:
+        if not silent:
+            print("Starting Code Execution...")
+
         for idx, (op, *args) in enumerate(self._commands, 1):
             if op == "const":
                 self.push(args[0])
@@ -58,9 +62,16 @@ class StackMachine:
 
             if self.verbose:
                 print(
-                    f"{idx} - op: {op}, args: {args}, stack: {self._stack}, memory: {self._memory}"
+                    f"cycle: {self.format(idx, 5)}",
+                    f"op: {self.format(op, 8)}",
+                    f"args: {self.format(args, 15)}",
+                    f"stack: {self.format(self._stack, 15)}",
+                    f"memory: {self._memory}",
                 )
             time.sleep(self.tickrate)
+
+    def format(self, val, width: int) -> str:
+        return str(val) + " " * (width - len(str(val)))
 
 
 def main() -> int:

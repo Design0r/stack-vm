@@ -36,7 +36,19 @@ class Lexer:
                     c_pos += 1
                     curr = content[c_pos]
 
-                yield Token(Tokens.Identifier, "".join(content[pos:c_pos]))
+                name = "".join(content[pos:c_pos])
+                if name == "print":
+                    yield Token(Tokens.Print, name)
+                    c_pos += 1
+                    n_pos = c_pos
+                    curr = content[c_pos]
+                    while (curr.isalnum() or curr == "_") and c_pos < c_len:
+                        c_pos += 1
+                        curr = content[c_pos]
+                    name = "".join(content[n_pos:c_pos])
+                    yield Token(Tokens.Identifier, name)
+                else:
+                    yield Token(Tokens.Identifier, name)
                 pos += c_pos - pos
 
             elif char.isdigit():

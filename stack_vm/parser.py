@@ -9,6 +9,11 @@ class ASTNode:
 
 
 @dataclass(frozen=True, slots=True)
+class PrintNode(ASTNode):
+    varibale_name: str
+
+
+@dataclass(frozen=True, slots=True)
 class VariableNode(ASTNode):
     name: str
 
@@ -50,6 +55,16 @@ class Parser:
     def parse_statement(self):
         if self.curr_token.type == Tokens.EOL:
             self.next_token()
+
+        if self.curr_token.type == Tokens.Print:
+            t = self.curr_token
+            self.next_token()
+            assert (
+                self.curr_token.type == Tokens.Identifier
+            ), f"Expected Identifier, got {self.curr_token}"
+            t = self.curr_token
+            self.next_token()
+            return PrintNode(t.value)
 
         if self.curr_token.type == Tokens.Identifier:
             varibale_name = self.curr_token.value

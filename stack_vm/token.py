@@ -15,6 +15,7 @@ class Tokens(Enum):
     Slash = auto()
     Star = auto()
     Dot = auto()
+    Print = auto()
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}.{self._name_}"

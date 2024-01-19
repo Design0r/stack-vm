@@ -10,3 +10,6 @@ x = 24;
 y = 26;
 
 differenz = x - y;
+print circum;
+print area;
+print differenz;

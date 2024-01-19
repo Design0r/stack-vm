@@ -1,5 +1,4 @@
 import time
-from typing import Iterable
 
 
 class StackMachine:
@@ -55,8 +54,7 @@ class StackMachine:
             elif op == "load":
                 self.load(args[0])
             elif op == "print":
-                print(self._stack[-1])
-                continue
+                print(self.pop())
             else:
                 raise RuntimeError(f"Unknown Instruction: {op}")
 
@@ -72,24 +70,3 @@ class StackMachine:
 
     def format(self, val, width: int) -> str:
         return str(val) + " " * (width - len(str(val)))
-
-
-def main() -> int:
-    code = [
-        ("const", 5),
-        ("store", "x"),
-        ("const", 1),
-        ("store", "y"),
-        ("load", "x"),
-        ("load", "y"),
-        ("add",),
-        ("print",),
-    ]
-    s = StackMachine(code, tickrate=0.5, verbose=True)
-    s.exec()
-
-    return 0
-
-
-if __name__ == "__main__":
-    exit(main())

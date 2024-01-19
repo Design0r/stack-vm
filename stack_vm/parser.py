@@ -40,7 +40,7 @@ class Parser:
     def __init__(self, tokens: Generator[Token, None, None]):
         self.tokens = tokens
         self.curr_token = next(tokens)
-        print("Generating Abstact Syntax Tree...")
+        print("Generating Abstact Syntax Tree...\n")
 
     def next_token(self):
         self.curr_token = next(self.tokens)

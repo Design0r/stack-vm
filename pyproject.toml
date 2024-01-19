@@ -1,4 +1,11 @@
+[project]
+name = "stack-vm"
+version = "0.1.0"
+
+
+[project.scripts]
+stack-vm = "stack_vm.cli:main"
+
 [tool.pyright]
-executionEnvironments = [
-  { root = "stack-vm" }
-]
+executionEnvironments = [{ root = "stack-vm" }]
+

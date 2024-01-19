@@ -24,9 +24,9 @@ class StackMachine:
             return self._stack.pop()
         return [self._stack.pop() for _ in range(num)]
 
-    def exec(self, silent=False) -> None:
-        if not silent:
-            print("Starting Code Execution...")
+    def exec(self) -> None:
+        if self.verbose:
+            print("\nStarting Code Execution...\n")
 
         for idx, (op, *args) in enumerate(self._commands, 1):
             if op == "const":

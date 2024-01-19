@@ -15,14 +15,17 @@ class CodeGenerator:
         self.ast = ast
         self.binary_code = []
 
-    def generate(self, silent=False):
-        if not silent:
-            print("Generating Stack Machine Code...")
+    def generate(self, verbose=False):
+        if verbose:
+            print("Generating Stack Machine Code...\n")
 
         for node in self.ast:
             if not node:
                 continue
             self.traverse(node)
+
+        if verbose:
+            self.print()
 
         return self.binary_code
 
@@ -62,3 +65,7 @@ class CodeGenerator:
             self.binary_code.append(("const", curr_node.value))
 
         return self.binary_code
+
+    def print(self):
+        for i in self.binary_code:
+            print(i)

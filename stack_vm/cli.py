@@ -26,7 +26,7 @@ def main() -> int:
     args = get_args()
 
     tokens = Lexer(args.file).parse_tokens(verbose=args.verbose)
-    ast = Parser(tokens).parse()
+    ast = Parser(tokens, verbose=args.verbose).parse()
     code = CodeGenerator(ast).generate(verbose=args.verbose)
 
     vm = StackMachine(code, tickrate=args.tickrate, verbose=args.verbose)

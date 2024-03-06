@@ -37,10 +37,11 @@ class AssignmentNode(ASTNode):
 
 
 class Parser:
-    def __init__(self, tokens: Generator[Token, None, None]):
+    def __init__(self, tokens: Generator[Token, None, None], verbose=False):
         self.tokens = tokens
         self.curr_token = next(tokens)
-        print("Generating Abstact Syntax Tree...\n")
+        if verbose:
+            print("Generating Abstact Syntax Tree...\n")
 
     def next_token(self):
         self.curr_token = next(self.tokens)
